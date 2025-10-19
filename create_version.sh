@@ -51,8 +51,6 @@ fi
   zip -r "${now}.zip" .
 )
 
-pwd 
-
 mkdir versions
 cp "data/final_schema/${now}/${now}.zip" versions
 
