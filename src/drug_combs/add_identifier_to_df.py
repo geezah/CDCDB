@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from multiprocessing import Pool
-import sys
-sys.path.insert(0, '../..')
 from src.drug_identfiers_resolver.identifiers_resolver import WikiDataIdsResolver, DrugIdentifiersResolver, \
     APIBasedIdentifiersResolver
 import warnings
@@ -69,8 +67,8 @@ def main(args):
         df = pd.read_excel(args.input_path)
     else:
         exit("Unsupported file format")
-    wikidata_ids_resolver = WikiDataIdsResolver("../drug_combs/input_data/qid_to_drugbank.json",
-                                                "../drug_combs/input_data/qid_to_pubchem.json",
+    wikidata_ids_resolver = WikiDataIdsResolver("input_data/qid_to_drugbank.json",
+                                                "input_data/qid_to_pubchem.json",
                                                 cache_file_path="wikidata_disk_cache")
     resolver = DrugIdentifiersResolver(wikidata_ids_resolver, APIBasedIdentifiersResolver())
     drug_identifiers_adder = DataframeDrugIdentifiersAdder(resolver, args.aslist, args.as_str_array)
@@ -100,4 +98,3 @@ if __name__ == '__main__':
     argument_parser.add_argument("output_path", type=str, help="The path to save the result csv")
     args = argument_parser.parse_args()
     main(args)
-

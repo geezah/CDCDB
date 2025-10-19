@@ -1,12 +1,9 @@
 # CDCDB
 To create a new version
-1. create python venv
-2. fill `drug_combs/input_data/aact_credentials.json` with your credentials for AACT
-3. > pip install -r requirements
-4. > cd drug_combs
-5. Create a new version by running the creation script 
+1. [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/)
+2. Enter your AACT credentials into `input_data/aact_credentials.json`
+3. Run `uv sync --frozen` in the top-level directory of this repository
+5. Create a new CDCDB dump by running the provided script 
   > ./create_version.sh
-6. Follow the progress-bars, and install scispacy's model if missing
-
-
+  
 Note, there are plenty of caches used in this system, therefore the first run would be longer.

@@ -1,0 +1,22 @@
+[project]
+name = "cdcdb"
+version = "0.1.0"
+requires-python = "==3.8.*"
+dependencies = [
+    "diskcache",
+    "edlib",
+    "en-core-sci-lg",
+    "ipykernel",
+    "scikit-learn",
+    "psycopg2-binary",
+    "scispacy",
+    "sqlalchemy",
+    "nmslib",
+    "pubchempy",
+    "openpyxl",
+    "pandas",
+]
+
+[tool.uv.sources]
+en-core-sci-lg = { url = "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_lg-0.5.4.tar.gz" }
+

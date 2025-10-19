@@ -1,7 +1,3 @@
-import sys
-
-sys.path.insert(0, '../..')
-
 import edlib
 from functools import lru_cache
 from src.drug_combs.aact_fetcher import AACTFetcher
@@ -14,12 +10,20 @@ import warnings
 import diskcache as dc
 
 import spacy
+import scispacy
+
 from scispacy.linking import EntityLinker
 
 nlp = spacy.load("en_core_sci_lg")
-linker = EntityLinker(resolve_abbreviations=True, name="umls")
 
-nlp.add_pipe(linker)
+nlp.add_pipe(
+    "scispacy_linker",
+    config={"resolve_abbreviations": True, "linker_name": "umls"},
+    after="ner",  # good practice: run after NER
+)
+
+# Grab the component if you need a handle
+linker = nlp.get_pipe("scispacy_linker")
 
 warnings.filterwarnings("ignore")
 DRUG_IDENTIFIERS_COLUMN = "drug_identifiers"

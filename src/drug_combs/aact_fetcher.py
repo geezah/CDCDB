@@ -75,13 +75,13 @@ FROM (SELECT studies.nct_id                                                     
                           FROM study_references
                           GROUP BY nct_id
       ) as collected_refs on collected_refs.nct_id = studies.nct_id
-      where intervention_type = 'Drug'
+      where intervention_type = 'DRUG'
         and dg.id in (SELECT dg.id
                       FROM studies
                                LEFT JOIN design_groups dg on studies.nct_id = dg.nct_id
                                LEFT JOIN design_group_interventions dgi on dg.id = dgi.design_group_id
                                LEFT JOIN interventions i on dgi.intervention_id = i.id
-                      where intervention_type = 'Drug'
+                      where intervention_type = 'DRUG'
                       GROUP BY studies.nct_id
                              , dg.id
                       HAVING COUNT(*)

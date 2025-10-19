@@ -1,9 +1,6 @@
 import json
 import pandas as pd
 from tqdm import tqdm
-import sys
-sys.path.insert(0, '../..')
-
 from src.drug_combs.add_identifier_to_df import DataframeDrugIdentifiersAdder
 from src.drug_identfiers_resolver.identifiers_resolver import DrugIdentifiersResolver, APIBasedIdentifiersResolver, \
     WikiDataIdsResolver
@@ -83,8 +80,8 @@ class OrangeBookParser(object):
 
 
 def get_drugs_identifiers_adder():
-    wikidata_ids_resolver = WikiDataIdsResolver("../drug_combs/input_data/qid_to_drugbank.json",
-                                                "../drug_combs/input_data/qid_to_pubchem.json",
+    wikidata_ids_resolver = WikiDataIdsResolver("input_data/qid_to_drugbank.json",
+                                                "input_data/qid_to_pubchem.json",
                                                 cache_file_path="wikidata_disk_cache")
     resolver = DrugIdentifiersResolver(wikidata_ids_resolver, APIBasedIdentifiersResolver())
     drug_identifiers_adder = DataframeDrugIdentifiersAdder(resolver, False)
@@ -145,4 +142,3 @@ if __name__ == '__main__':
     argument_parser.add_argument("parsed_df_path", type=str, help="path to output the combs df [csv/xlsx]")
     args = argument_parser.parse_args()
     main(args)
-

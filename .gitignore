@@ -1,0 +1,11 @@
+errors.csv
+dbid_disk_cache/
+default_wikicache/
+wikidata_disk_cache/
+NER-mappings.cache/
+data/
+versions/
+latestVersion/
+
+.vscode
+__pycache__
